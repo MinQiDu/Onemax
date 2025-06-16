@@ -129,6 +129,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OneMax.cpp" />
     <ClCompile Include="SimulatedAnnealing.cpp" />
+    <ClCompile Include="Tabu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExhaustiveSearch.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="HillClimbing.h" />
     <ClInclude Include="OneMax.h" />
     <ClInclude Include="SimulatedAnnealing.h" />
+    <ClInclude Include="Tabu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
