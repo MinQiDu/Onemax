@@ -127,12 +127,3 @@ int algo_TB::Evaluation(const vector<int>& sol)
 	return fit;
 }
 
-void algo_TB::Create_Record(const string& filename, const vector<int>& content)
-{
-	ofstream file(filename);
-	for (int i = 0; i < mnfes; ++i)
-	{
-		file << i+1 << " " << content[i] << "\n";
-	}
-	file.close();
-}

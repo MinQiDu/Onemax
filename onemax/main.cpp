@@ -6,6 +6,30 @@
 #include <string> // ³B²zstring
 #include <algorithm> // for all_of(input.begin(), input.end(), ::isdigit)
 
+bool is_num(const string& input)
+{
+    return !input.empty() && all_of(input.begin(), input.end(), ::isdigit);
+}
+
+int getline_and_check(const string& prompt)
+{
+    string input;
+
+    while (true)
+    {
+        cout << prompt;
+        getline(cin, input);
+        if (is_num(input))
+        {
+            return stoi(input);
+        }
+        else
+        {
+            cout << "Please retype and make sure the form is number.\n";
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
     int bit = atoi(argv[1]);
@@ -46,27 +70,5 @@ int main(int argc, char *argv[])
     else
     {
         cout << "Choose Algorithm ( ES / HC / SA / GA / TB )" << endl;
-    }
-}
-bool is_num(const string& input)
-{
-    return !input.empty() && all_of(input.begin(), input.end(), ::isdigit);
-}
-int getline_and_check(const string& prompt)
-{
-    string input;
-
-    while (true)
-    {
-        cout << prompt;
-        getline(cin, input);
-        if (is_num(input))
-        {
-            return stoi(input);
-        }
-        else
-        {
-            cout << "Please retype and make sure the form is number.\n";
-        }
     }
 }
