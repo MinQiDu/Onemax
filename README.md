@@ -52,7 +52,18 @@
 - void Evaluation(const vector<int> &child, int &fitness) : 計算children的fitness
 - void Create_FitRecord(const string &filename, const vector<double> &content) : create.txt to record fitness
 
+### `TabuSearch`
 
+- void RunALG(const int& _bit,
+			const int& _run,
+			const int& _iter,
+			const int& _tabu_size,
+			const int& _tweak_num) : 執行TabuSearch
+
+- vector<int> Init() : 產生初始解並輸出，設定best_sol, best_fit初始值
+- vector<int> Tweak(const vector<int> &origin_sol) : 微調origin_sol tweak_num次並輸出
+- int Evaluation(const vector<int>& sol) : 計算sol的onemax fitness，輸出fitness
+- void Create_Record(const string& filename, const vector<T>& content) : 產生紀錄內容的文字檔，因為實作在多種型別上所以使用template
 
 ## 3.Input
 
@@ -62,8 +73,10 @@
 - 回合數 | run = 30
 - 單回合迭代次數 | iter = 1000
 - 一世代人口數 | pop_size = 20 (GA)
-- 演算法種類 | algo_type = ES / HC / SA / GA
-
+- 演算法種類 | algo_type = ES / HC / SA / GA / TB
+- (TabuSearch)         
+Please type tabu_size = tabu_size   
+Please type tweak_num = tweak_num
 
 
 ## 4.Output
@@ -88,6 +101,12 @@
 - plot_GA.plt
 - result_OneMax_GeneticAlgo.png
 
+### `Tabusearch`
+- fitness_of_run_1~30_TB_bit_size_tweak.txt
+- fitness_average_TB_bit_size_tweak.txt
+- plot_TB.plt
+- result_onemax_TB_bit_size_tweak.png
+
 
 
 ## 5.執行方式
@@ -102,7 +121,7 @@
 2. 先到正確資料夾路徑
 3. 輸入 : 
 
-g++ main.cpp OneMax.cpp ExhaustiveSearch.cpp HillClimbing.cpp SimulatedAnnealing.cpp GeneticAlgo.cpp -o onemax.exe
+g++ main.cpp OneMax.cpp ExhaustiveSearch.cpp HillClimbing.cpp SimulatedAnnealing.cpp GeneticAlgo.cpp Tabu.cpp -o onemax.exe
 
 
 ### `------------執行------------`
@@ -110,12 +129,13 @@ g++ main.cpp OneMax.cpp ExhaustiveSearch.cpp HillClimbing.cpp SimulatedAnnealing
 1. 在 Windows cmd 或 PowerShell 中
 2. 先到正確資料夾路徑
 3. 輸入 :
-.\onemax.exe bit run iter pop_size algo_type( ES / HC / SA / GA )   
+.\onemax.exe bit run iter pop_size algo_type( ES / HC / SA / GA /TB )   
 eg.    
 .\onemax.exe 100 30 1000 1 HC
 .\onemax.exe 100 30 1000 1 SA
 .\onemax.exe 100 30 1000 20 GA
 .\onemax.exe 64 1 1 1 ES
+.\onemax.exe 10 30 5000 0 TB
 
 
 ### `------------出圖------------`
@@ -134,6 +154,9 @@ gnuplot plot_SA.plt
 gnuplot plot_GA.plt   
 即可在資料夾中找到 result_OneMax_GeneticAlgo.png
 
+gnuplot plot_TB.plt   
+即可在資料夾中找到
+result_onemax_TB_bit_size_tweak.png
 
 ##  6. 檔案結構
 - onemax/  
@@ -142,4 +165,5 @@ gnuplot plot_GA.plt
  `GeneticAlgo.cpp` / `GeneticAlgo.h`   
  `HillClimbing.cpp` / `HillClimbing.h`
  `SimulatedAnnealing.cpp` / `SimulatedAnnealing.h`
+ `Tabu.cpp` / `Tabu.h`
  `OneMax.cpp` / `OneMax.h`

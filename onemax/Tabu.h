@@ -27,7 +27,7 @@ private :
 	vector<double> avg_record;                        /*紀錄每run平均fitness*/
 
 	vector<int> Init();                               /*產生初始解並輸出，設定best_sol, best_fit初始值*/
-	vector<int> Tweak(const vector<int> &origin_sol); /*微調origin_sol並輸出*/
+	vector<int> Tweak(const vector<int> &origin_sol); /*微調origin_sol tweak_num次並輸出*/
 	int Evaluation(const vector<int>& sol);           /*計算sol的onemax fitness，輸出fitness*/
 
 	template<typename T>
