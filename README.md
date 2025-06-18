@@ -4,8 +4,8 @@
 
 ## 1.基本說明
 
--Using C++
--Implement 30 minutes ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo to solve OneMax problem
+- Using C++
+- Implement 30 minutes ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo / TabuSearch to solve OneMax problem
 
 
 
