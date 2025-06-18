@@ -8,11 +8,11 @@ using namespace std;
 class algo_TB
 {
 public :
-	void RunALG(const int &bit, 
-		        const int &run,
-		        const int &iter,
-	            const int &tweak_num,
-	            const int &tabu_size);                /*∞ı¶ÊTabuSearch*/
+	void RunALG(const int& _bit,
+				const int& _run,
+				const int& _iter,
+				const int& _tabu_size,
+				const int& _tweak_num);               /*∞ı¶ÊTabuSearch*/
 private :
 	int bit;
 	int run; 
