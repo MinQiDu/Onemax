@@ -75,7 +75,7 @@ void algo_TB::RunALG(const int& _bit,
 
 	ofstream plot("plot_TB.plt");
 	plot << "set terminal png size 800, 600\n";
-	plot << "set output 'result_onemax_TB_" << bit << "bit_size" << tabu_size << "_tweak" << tweak_num << ".png'\n";
+	plot << "set output 'result_OneMax_TB_" << bit << "bit_size" << tabu_size << "_tweak" << tweak_num << ".png'\n";
 	plot << "set title 'Average Convergence with TabuSearch on OneMax'\n";
 	plot << "set xlabel 'Evaluation times'\n";
 	plot << "set ylabel 'Average Fitness'\n";

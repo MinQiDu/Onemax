@@ -1,4 +1,4 @@
-# 比較 ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo 解 OneMax problem
+# 比較 ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo / TabuSearch  解 OneMax problem
 
 
 
@@ -69,14 +69,14 @@
 
 ### command_line argument :
 
-- 二進位位元數 | bit = 64(ES) / 100(HC / SA / GA)
+- 二進位位元數 | bit = 64(ES) / 100(HC / SA / GA) / 4 or 10(TB)
 - 回合數 | run = 30
-- 單回合迭代次數 | iter = 1000
+- 單回合迭代次數 | iter = 1000(HC / SA / GA) / 5000(TB)
 - 一世代人口數 | pop_size = 20 (GA)
 - 演算法種類 | algo_type = ES / HC / SA / GA / TB
 - (TabuSearch)         
-Please type tabu_size = tabu_size   
-Please type tweak_num = tweak_num
+Please type tabu_size = 輸入tabu_size   
+Please type tweak_num = 輸入tweak_num
 
 
 ## 4.Output
@@ -105,7 +105,7 @@ Please type tweak_num = tweak_num
 - fitness_of_run_1~30_TB_bit_size_tweak.txt
 - fitness_average_TB_bit_size_tweak.txt
 - plot_TB.plt
-- result_onemax_TB_bit_size_tweak.png
+- result_OneMax_TB_bit_size_tweak.png
 
 
 
@@ -131,11 +131,13 @@ g++ main.cpp OneMax.cpp ExhaustiveSearch.cpp HillClimbing.cpp SimulatedAnnealing
 3. 輸入 :
 .\onemax.exe bit run iter pop_size algo_type( ES / HC / SA / GA /TB )   
 eg.    
-.\onemax.exe 100 30 1000 1 HC
-.\onemax.exe 100 30 1000 1 SA
-.\onemax.exe 100 30 1000 20 GA
-.\onemax.exe 64 1 1 1 ES
-.\onemax.exe 10 30 5000 0 TB
+.\onemax.exe 100 30 1000 1 HC   
+.\onemax.exe 100 30 1000 1 SA   
+.\onemax.exe 100 30 1000 20 GA   
+.\onemax.exe 64 1 1 1 ES   
+.\onemax.exe 10 30 5000 0 TB   
+-->Please type tabu_size = 輸入tabu_size   
+-->Please type tweak_num = 輸入tweak_num
 
 
 ### `------------出圖------------`
@@ -146,24 +148,27 @@ eg.
 4. 輸入 : 
 
 gnuplot plot_HC.plt   
-即可在資料夾中找到 result_OneMax_HillClimbing.png
+即可在資料夾中找到 
+result_OneMax_HillClimbing.png
 
 gnuplot plot_SA.plt   
-即可在資料夾中找到 result_OneMax_SimulatedAnnealing.png
+即可在資料夾中找到 
+result_OneMax_SimulatedAnnealing.png
 
 gnuplot plot_GA.plt   
-即可在資料夾中找到 result_OneMax_GeneticAlgo.png
+即可在資料夾中找到 
+result_OneMax_GeneticAlgo.png
 
 gnuplot plot_TB.plt   
 即可在資料夾中找到
-result_onemax_TB_bit_size_tweak.png
+result_OneMax_TB_bit_size_tweak.png
 
 ##  6. 檔案結構
 - onemax/  
  `main.cpp`  
  `ExhaustiveSearch.cpp` / `ExhaustiveSearch.h`  
  `GeneticAlgo.cpp` / `GeneticAlgo.h`   
- `HillClimbing.cpp` / `HillClimbing.h`
- `SimulatedAnnealing.cpp` / `SimulatedAnnealing.h`
- `Tabu.cpp` / `Tabu.h`
+ `HillClimbing.cpp` / `HillClimbing.h`   
+ `SimulatedAnnealing.cpp` / `SimulatedAnnealing.h`   
+ `Tabu.cpp` / `Tabu.h`   
  `OneMax.cpp` / `OneMax.h`
