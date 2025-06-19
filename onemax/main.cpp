@@ -4,7 +4,8 @@
 #include "GeneticAlgo.h"
 #include "Tabu.h"
 #include <string> // 處理string
-#include <algorithm> // for all_of(input.begin(), input.end(), ::isdigit)
+#include <algorithm> // for all_of(input.begin(), input.end(), ::isdigit) & transform(輸入起點, 輸入終點, 輸出起點, 處理函式);
+#include <cctype> // for toupper() tolower()
 
 bool is_num(const string& input)
 {
@@ -36,7 +37,11 @@ int main(int argc, char *argv[])
     int run = atoi(argv[2]);
     int iter = atoi(argv[3]);
     int pop_size = atoi(argv[4]);
-    string algo_type = argv[5]; // 選演算法
+    string algo_type = argv[5];  /*選演算法*/
+    transform(algo_type.begin(), /*防呆! 轉換algo_type成全大寫*/
+        algo_type.end(), 
+        algo_type.begin(), 
+        toupper);
 
     if (algo_type == "ES") /*ExhaustiveSearch*/
     {
