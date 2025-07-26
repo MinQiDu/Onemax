@@ -1,174 +1,242 @@
-# 比較 ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo / TabuSearch  解 OneMax problem
+# Implement ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo / TabuSearch for Solving OneMax Problem
 
+## ( I ) Introduction
 
+- Language: C++
+- Metaheuristic algorithms: Exhaustive Search (ES), Hill Climbing (HC), Simulated Annealing (SA), Genetic Algorithm (GA), Tabu Search (TB)
+- Benchmark function: OneMax Problem
+- Execution time: approximately 30 minutes total for all algorithms
 
-## 1.基本說明
-
-- Using C++
-- Implement 30 minutes ExhaustiveSearch / HillClimbing / SimulatedAnnealing / GeneticAlgo / TabuSearch to solve OneMax problem
-
-
-
-## 2.主要功能
+## ( II ) Main Functionality
 
 ### `ExhaustiveSearch`
 
-- void RunALG(int bit) : 執行ES
-
-- void Evaluation(const vector<int> &sol, int &value) : 計算新解的value
-- void Reset() : 歸零窮舉次數
-
+- `void RunALG(int bit)`\
+  *Runs exhaustive search over all binary strings of length **``*
+- `void Evaluation(const vector<int>& sol, int& value)`\
+  *Calculates the fitness value of a solution*
+- `void Reset()`\
+  *Resets the counter for exhaustive enumeration*
 
 ### `HillClimbing`
 
-- void RunALG(int bit, int run, int iter) : 執行HC
-
-- vector<int> vector<int> Init() : 產生一個隨機初始sol
-- vector<int> Neighbor(const vector<int> &best_sol) : generate neighbour after flip one random bit from original solution
-- void Evaluation(const vector<int> &sol, int &value) : 計算新解的value
-- void Reset() : 每run歸零nfes次數
+- `void RunALG(int bit, int run, int iter)`\
+  *Runs HC for specified number of runs and iterations*
+- `vector<int> Init()`\
+  *Generates a random initial solution*
+- `vector<int> Neighbor(const vector<int>& best_sol)`\
+  *Generates a neighbor by flipping one random bit*
+- `void Evaluation(const vector<int>& sol, int& value)`\
+  *Calculates fitness value of a solution*
+- `void Reset()`\
+  *Resets **``** counter per run*
 
 ### `SimulatedAnnealing`
 
-- void RunALG(int bit, int run, int iter) : 執行SA
-
-- void Init(vector<int> &sol, int &value) : 隨機產生初始解
-- vector<int> Neighbor(const vector<int> &sol) : 多點變異產生鄰居
-- void Evaluation(const vector<int> &sol, int &value) : 計算新解的value
-- void T_cooldown(double &temp) : 降低溫度
-- void T_reheat(double &temp) : 升高溫度
-- void Create_Vrecord(const string& filename, const vector<double>& content) : create.txt to record values
+- `void RunALG(int bit, int run, int iter)`\
+  *Runs SA algorithm*
+- `void Init(vector<int>& sol, int& value)`\
+  *Generates a random initial solution*
+- `vector<int> Neighbor(const vector<int>& sol)`\
+  *Generates a neighbor by multi-bit mutation*
+- `void Evaluation(const vector<int>& sol, int& value)`\
+  *Calculates fitness value*
+- `void T_cooldown(double& temp)` / `void T_reheat(double& temp)`\
+  *Temperature schedule functions*
+- `void Create_Vrecord(const string& filename, const vector<double>& content)`\
+  *Creates record file for fitness values*
 
 ### `GeneticAlgo`
 
-- void RunALG(int bit, int run, int iter, int pop_size) : 執行GA
-
-- void Init() : 產生初始pop_size個解存入陣列population
-- void Select_Roulette() : 輪盤法select
-- void Select_Tournament() : 競賽法select
-- void Mutation(vector<int> &child) : adaptive mutation
-- void Crossover_Unify(const vector<int> &p1, const vector<int> &p2, vector<int> &c1, vector<int> &c2) : unify crossover，多元性大較易跳脫區域最佳解
-- void Crossover_Mask(const vector<int> &p1, const vector<int> &p2, vector<int> &c1, vector<int> &c2) : mask crossover，適合具domain knowledge的問題 變動不大易卡在區域最佳解
-- void Evaluation(const vector<int> &child, int &fitness) : 計算children的fitness
-- void Create_FitRecord(const string &filename, const vector<double> &content) : create.txt to record fitness
+- `void RunALG(int bit, int run, int iter, int pop_size)`\
+  *Runs GA*
+- `void Init()`\
+  *Initializes population of size **``*
+- `void Select_Roulette()` / `void Select_Tournament()`\
+  *Selection strategies*
+- `void Mutation(vector<int>& child)`\
+  *Applies adaptive mutation*
+- `void Crossover_Unify(...)` / `void Crossover_Mask(...)`\
+  *Two crossover methods: **``** for diversity, **``** for stability*
+- `void Evaluation(...)`\
+  *Evaluates fitness of child*
+- `void Create_FitRecord(...)`\
+  *Creates record file for fitness*
 
 ### `TabuSearch`
 
-- void RunALG(const int& _bit,
-			const int& _run,
-			const int& _iter,
-			const int& _tabu_size,
-			const int& _tweak_num) : 執行TabuSearch
+- `void RunALG(int bit, int run, int iter, int tabu_size, int tweak_num)`\
+  *Runs Tabu Search*
+- `vector<int> Init()`\
+  *Initializes starting solution and best tracking*
+- `vector<int> Tweak(const vector<int>& origin_sol)`\
+  *Generates tweaked neighbors*
+- `int Evaluation(const vector<int>& sol)`\
+  *Computes OneMax fitness*
+- `void Create_Record(const string& filename, const vector<T>& content)`\
+  *Creates record file (templated for flexibility)*
 
-- vector<int> Init() : 產生初始解並輸出，設定best_sol, best_fit初始值
-- vector<int> Tweak(const vector<int> &origin_sol) : 微調origin_sol tweak_num次並輸出
-- int Evaluation(const vector<int>& sol) : 計算sol的onemax fitness，輸出fitness
-- void Create_Record(const string& filename, const vector<T>& content) : 產生紀錄內容的文字檔，因為實作在多種型別上所以使用template
+## ( III ) Input
 
-## 3.Input
+### Command-line arguments:
 
-### command_line argument :
+- **Binary Length:** `bit = (64 for ES / 100 for HC, SA, GA / 4 or 10 for TB)`
+- **Number of Runs:** `run = (e.g., 30)`
+- **Iterations Per Run:** `iter = (1000 for HC, SA, GA / 5000 for TB)`
+- **Population Size:** `pop_size = (only for GA)`
+- **Type of Algorithm** `algo_type = ES / HC / SA / GA / TB`
+- For Tabu Search only:
+  - **User Input:** `tabu_size = 5`
+  - **User Input:** `tweak_num = 20`
 
-- 二進位位元數 | bit = 64(ES) / 100(HC / SA / GA) / 4 or 10(TB)
-- 回合數 | run = 30
-- 單回合迭代次數 | iter = 1000(HC / SA / GA) / 5000(TB)
-- 一世代人口數 | pop_size = 20 (GA)
-- 演算法種類 | algo_type = ES / HC / SA / GA / TB
-- (TabuSearch)         
-Please type tabu_size = 輸入tabu_size   
-Please type tweak_num = 輸入tweak_num
-
-
-## 4.Output
+## ( IV ) Output
 
 ### `HillClimbing`
-- values_of_run_1~30_HC.txt
-- values_average_HC.txt
-- plot_HC.plt
-- result_OneMax_HillClimbing.png
 
+- `values_of_run_1~30_HC.txt`
+- `values_average_HC.txt`
+- `plot_HC.plt`
+- `result_OneMax_HillClimbing.png`
 
 ### `SimulatedAnnealing`
-- values_of_run~30_SA.txt
-- values_average_SA.txt
-- plot_SA.plt
-- result_OneMax_SimulatedAnnealing.png
 
+- `values_of_run_1~30_SA.txt`
+- `values_average_SA.txt`
+- `plot_SA.plt`
+- `result_OneMax_SimulatedAnnealing.png`
 
 ### `GeneticAlgo`
-- fitness_of_run_1~30.txt
-- fitness_average.txt
-- plot_GA.plt
-- result_OneMax_GeneticAlgo.png
 
-### `Tabusearch`
-- fitness_of_run_1~30_TB_bit_size_tweak.txt
-- fitness_average_TB_bit_size_tweak.txt
-- plot_TB.plt
-- result_OneMax_TB_bit_size_tweak.png
+- `fitness_of_run_1~30.txt`
+- `fitness_average.txt`
+- `plot_GA.plt`
+- `result_OneMax_GeneticAlgo.png`
 
+### `TabuSearch`
 
+- `fitness_of_run_1~30_TB_bit_size_tweak.txt`
+- `fitness_average_TB_bit_size_tweak.txt`
+- `plot_TB.plt`
+- `result_OneMax_TB_bit_size_tweak.png`
 
-## 5.執行方式
+## ( V ) How to Compile and Run
 
-### `------------編譯------------` 
-#### `VisualStudio`
-1. 開啟 Visual Studio 專案 `OneMax.sln`
-2. 按下 `Ctrl + F5` 開始編譯
+### Compile
 
-#### `VSCode
-1. 在 Windows cmd 或 PowerShell 中
-2. 先到正確資料夾路徑
-3. 輸入 : 
+#### Visual Studio
 
+1. Open Visual Studio project `OneMax.sln`
+2. Press `Ctrl + F5` to build
+
+#### VSCode
+
+1. Open PowerShell or Windows CMD
+2. Navigate to the correct directory
+3. Compile with:
+
+```bash
 g++ main.cpp OneMax.cpp ExhaustiveSearch.cpp HillClimbing.cpp SimulatedAnnealing.cpp GeneticAlgo.cpp Tabu.cpp -o onemax.exe
+```
+
+### Run
+
+1. Open PowerShell or CMD
+2. Navigate to the folder
+3. Run the program with:
+
+```bash
+.\onemax.exe bit run iter pop_size algo_type
+```
+
+Examples:
+
+```bash
+.\onemax.exe 100 30 1000 1 HC
+.\onemax.exe 100 30 1000 1 SA
+.\onemax.exe 100 30 1000 20 GA
+.\onemax.exe 64 1 1 1 ES
+.\onemax.exe 10 30 5000 0 TB
+```
+
+You will be prompted:
+
+```
+Please type tabu_size = (your input)
+Please type tweak_num = (your input)
+```
+
+### Plot Results
+
+1. Install gnuplot
+2. Open CMD or PowerShell
+3. Run with:
+
+```bash
+gnuplot plot_HC.plt
+gnuplot plot_SA.plt
+gnuplot plot_GA.plt
+gnuplot plot_TB.plt
+```
+
+Output PNGs will appear in the working directory
+
+## ( VI ) File Structure
+
+```
+onemax/
+|
+├── main.cpp
+├── OneMax.cpp / OneMax.h
+├── ExhaustiveSearch.cpp / ExhaustiveSearch.h
+├── HillClimbing.cpp / HillClimbing.h
+├── SimulatedAnnealing.cpp / SimulatedAnnealing.h
+├── GeneticAlgo.cpp / GeneticAlgo.h
+├── Tabu.cpp / Tabu.h
+│
+├── results/            ← output files (.txt, .png)
+└── README.md           ← this file
+
+```
+## ( VII ) Experimental Results
+
+### Exhausted Search for 64 bits Binary Length and Run 30 mins
+<img src="results/ExhaustedSearch/result_OneMax_ExhaustiveSearch.png" width="100%"/>
+
+### Genetic Algorithm for 100 bits Binary Length
+<img src="results/GA/results_OneMax_GeneticAlgo.png" width="80%"/>
+
+### Hill Climbing for 100 bits Binary Length
+<img src="results/HC/result_OneMax_HillClimbing.png" width="80%"/>
+
+### Simulated Annealing for 100 bits Binary Length
+<img src="results/SA/result_OneMax_SimulatedAnnealing.png" width="80%"/>
+
+### Tabu Search for 10 bits Binary Length with Tabu List Size 5, Tweak 20 times
+<img src="results/TB/result_OneMax_TB_10bit_size5_tweak20.png" width="80%"/>
 
 
-### `------------執行------------`
+## ( VII ) Observations
 
-1. 在 Windows cmd 或 PowerShell 中
-2. 先到正確資料夾路徑
-3. 輸入 :
-.\onemax.exe bit run iter pop_size algo_type( ES / HC / SA / GA /TB )   
-eg.    
-.\onemax.exe 100 30 1000 1 HC   
-.\onemax.exe 100 30 1000 1 SA   
-.\onemax.exe 100 30 1000 20 GA   
-.\onemax.exe 64 1 1 1 ES   
-.\onemax.exe 10 30 5000 0 TB   
--->Please type tabu_size = 輸入tabu_size   
--->Please type tweak_num = 輸入tweak_num
+- Exhaustive Search guarantees the global optimum but is only feasible for very small problem sizes.
+- Hill Climbing is fast but easily stuck in local optima.
+- Simulated Annealing introduces randomness and temperature decay to escape local optima.
+- Genetic Algorithm balances exploration and exploitation well, especially with larger populations.
+- Tabu Search effectively avoids cycling and revisiting previous solutions using a memory structure.
 
+## ( VIII ) Key Features
 
-### `------------出圖------------`
+- Object-oriented C++ implementation
+- Unified interface for all metaheuristic algorithms
+- Support for command-line parameter configuration
+- Exportable performance records and convergence plots
+- Compatible with gnuplot for automatic visualization
 
-1. 安裝gnuplot
-2. 在 Windows cmd 或 PowerShell 中
-3. 先到正確資料夾路徑
-4. 輸入 : 
+## ( IX ) Skills Demonstrated
 
-gnuplot plot_HC.plt   
-即可在資料夾中找到 
-result_OneMax_HillClimbing.png
+- Metaheuristic algorithm design and implementation
+- Modular software architecture in C++
+- Fitness evaluation and neighbor generation
+- Algorithm benchmarking and convergence comparison
+- Parameter sensitivity analysis
+- Shell-based automation and visualization scripting
 
-gnuplot plot_SA.plt   
-即可在資料夾中找到 
-result_OneMax_SimulatedAnnealing.png
-
-gnuplot plot_GA.plt   
-即可在資料夾中找到 
-result_OneMax_GeneticAlgo.png
-
-gnuplot plot_TB.plt   
-即可在資料夾中找到
-result_OneMax_TB_bit_size_tweak.png
-
-##  6. 檔案結構
-- onemax/  
- `main.cpp`  
- `ExhaustiveSearch.cpp` / `ExhaustiveSearch.h`  
- `GeneticAlgo.cpp` / `GeneticAlgo.h`   
- `HillClimbing.cpp` / `HillClimbing.h`   
- `SimulatedAnnealing.cpp` / `SimulatedAnnealing.h`   
- `Tabu.cpp` / `Tabu.h`   
- `OneMax.cpp` / `OneMax.h`
