@@ -86,8 +86,8 @@
 - **Population Size:** `pop_size = (only for GA)`
 - **Type of Algorithm** `algo_type = ES / HC / SA / GA / TB`
 - For Tabu Search only:
-  - **User Input:** `tabu_size = 5`
-  - **User Input:** `tweak_num = 20`
+  - **ize of Tabu List:** `tabu_size = 5`
+  - **Times of Tweak:** `tweak_num = 20`
 
 ## ( IV ) Output
 
@@ -119,7 +119,7 @@
 - `plot_TB.plt`
 - `result_OneMax_TB_bit_size_tweak.png`
 
-## ( V ) How to Compile and Run
+## ( V ) How to Compile, Run and Result Visualization
 
 ### Compile
 
@@ -165,7 +165,7 @@ Please type tabu_size = (your input)
 Please type tweak_num = (your input)
 ```
 
-### Plot Results
+### Result Visualization
 
 1. Install gnuplot
 2. Open CMD or PowerShell
@@ -215,7 +215,7 @@ onemax/
 <img src="results/TB/result_OneMax_TB_10bit_size5_tweak20.png" width="80%"/>
 
 
-## ( VII ) Observations
+## ( VIII ) Observations
 
 - Exhaustive Search guarantees the global optimum but is only feasible for very small problem sizes.
 - Hill Climbing is fast but easily stuck in local optima.
@@ -223,7 +223,7 @@ onemax/
 - Genetic Algorithm balances exploration and exploitation well, especially with larger populations.
 - Tabu Search effectively avoids cycling and revisiting previous solutions using a memory structure.
 
-## ( VIII ) Key Features
+## ( IX ) Key Features
 
 - Object-oriented C++ implementation
 - Unified interface for all metaheuristic algorithms
@@ -231,7 +231,7 @@ onemax/
 - Exportable performance records and convergence plots
 - Compatible with gnuplot for automatic visualization
 
-## ( IX ) Skills Demonstrated
+## ( X ) Skills Demonstrated
 
 - Metaheuristic algorithm design and implementation
 - Modular software architecture in C++
