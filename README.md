@@ -2,10 +2,10 @@
 
 ## ( I ) Introduction
 
-- Language: C++
-- Metaheuristic algorithms: Exhaustive Search (ES), Hill Climbing (HC), Simulated Annealing (SA), Genetic Algorithm (GA), Tabu Search (TB)
-- Benchmark function: OneMax Problem
-- Execution time: approximately 30 minutes total for all algorithms
+- **Programming language:** C++
+- **Metaheuristic algorithms:** Exhaustive Search (ES), Hill Climbing (HC), Simulated Annealing (SA), Genetic Algorithm (GA), Tabu Search (TB)
+- **Benchmark function:** OneMax Problem
+- **Execution time:** approximately 30 minutes total for all algorithms
 
 ## ( II ) Main Functionality
 
